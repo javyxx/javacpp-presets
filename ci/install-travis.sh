@@ -49,7 +49,11 @@ if [[ "$OS" == "linux-x86" ]] || [[ "$OS" == "linux-x86_64" ]] || [[ "$OS" =~ an
   SCL_ENABLE="devtoolset-7 python27"
   if [[ "cpython mxnet tensorflow onnx ngraph qt skia " =~ "$PROJ " ]] || [[ "$OS" =~ android ]]; then
     CENTOS_VERSION=7
-    SCL_ENABLE="devtoolset-7"
+    SCL_ENABLE=""
+    # MXNet and TensorFlow don't work well with GCC 6 or 7 for some reason
+    if [[ ! "mxnet tensorflow " =~ "$PROJ " ]]; then
+      SCL_ENABLE="devtoolset-7"
+    fi
   fi
   echo "Starting docker for x86_64 and x86 linux"
   docker run -d -ti -e CI_DEPLOY_USERNAME -e CI_DEPLOY_PASSWORD -e GPG_PASSPHRASE -e STAGING_REPOSITORY -e "container=docker" -v $HOME:$HOME -v $TRAVIS_BUILD_DIR/../:$HOME/build -v /sys/fs/cgroup:/sys/fs/cgroup nvidia/cuda:10.1-cudnn7-devel-centos$CENTOS_VERSION /bin/bash
@@ -61,8 +65,10 @@ if [[ "$OS" == "linux-x86" ]] || [[ "$OS" == "linux-x86_64" ]] || [[ "$OS" =~ an
   if [ "$OS" == "linux-x86" ]; then
     docker exec -ti $DOCKER_CONTAINER_ID /bin/bash -xec "rpm -qa | sed s/.x86_64$/.i686/ | xargs yum -q -y --disablerepo=cuda install"
     docker exec -ti $DOCKER_CONTAINER_ID /bin/bash -xec "find /var/cache/yum/ -name *.rpm | xargs rpm -i --force"
-    docker exec -ti $DOCKER_CONTAINER_ID /bin/bash -xec "wget --no-directories --no-parent -r https://www.repo.cloudlinux.com/cloudlinux/$CENTOS_VERSION/sclo/devtoolset-7/i386/ -P $HOME"
-    docker exec -ti $DOCKER_CONTAINER_ID /bin/bash -xec "rpm -i --force --nodeps $HOME/*.rpm"
+    if [[ "$SCL_ENABLE" =~ devtoolset-7 ]]; then
+      docker exec -ti $DOCKER_CONTAINER_ID /bin/bash -xec "wget --no-directories --no-parent -r https://www.repo.cloudlinux.com/cloudlinux/$CENTOS_VERSION/sclo/devtoolset-7/i386/ -P $HOME"
+      docker exec -ti $DOCKER_CONTAINER_ID /bin/bash -xec "rpm -i --force --nodeps $HOME/*.rpm"
+    fi
   fi
   # work around issues with CUDA 10.1
   docker exec -ti $DOCKER_CONTAINER_ID /bin/bash -xec "mv /usr/include/cublas* /usr/include/nvblas* /usr/local/cuda/include/"
