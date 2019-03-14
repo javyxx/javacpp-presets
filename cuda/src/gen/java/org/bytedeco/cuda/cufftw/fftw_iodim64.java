@@ -28,7 +28,7 @@ public class fftw_iodim64 extends Pointer {
         return (fftw_iodim64)super.position(position);
     }
 
-    public native @Cast("ptrdiff_t") long n(); public native fftw_iodim64 n(long n);
-    public native @Cast("ptrdiff_t") long is(); public native fftw_iodim64 is(long is);
-    public native @Cast("ptrdiff_t") long os(); public native fftw_iodim64 os(long os);
+    public native int n(); public native fftw_iodim64 n(int n);
+    public native @Cast("size_t") long is(); public native fftw_iodim64 is(long is);
+    public native @Cast("size_t") long os(); public native fftw_iodim64 os(long os);
 }

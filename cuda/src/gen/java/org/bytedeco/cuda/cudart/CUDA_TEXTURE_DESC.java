@@ -43,7 +43,7 @@ public class CUDA_TEXTURE_DESC extends Pointer {
     /** Mipmap minimum level clamp */
     public native float minMipmapLevelClamp(); public native CUDA_TEXTURE_DESC minMipmapLevelClamp(float minMipmapLevelClamp);
     /** Mipmap maximum level clamp */
-    public native float maxMipmapLevelClamp(); public native CUDA_TEXTURE_DESC maxMipmapLevelClamp(float maxMipmapLevelClamp);
+    public native float maxMipmapLevelClamp(); public native CUDA_TEXTURE_DESC maxMipmapLevelClamp(float maxMipmapLevelClamp); 
     /** Border Color */
     public native float borderColor(int i); public native CUDA_TEXTURE_DESC borderColor(int i, float borderColor);
     @MemberGetter public native FloatPointer borderColor();

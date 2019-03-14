@@ -27,27 +27,27 @@ public class cudaResourceDesc extends Pointer {
         return (cudaResourceDesc)super.position(position);
     }
 
-    /** Resource type */
-    public native @Cast("cudaResourceType") int resType(); public native cudaResourceDesc resType(int resType);
-    
-            /** CUDA array */
-            @Name("res.array.array") public native cudaArray res_array_array(); public native cudaResourceDesc res_array_array(cudaArray res_array_array);
+	/** Resource type */
+	public native @Cast("cudaResourceType") int resType(); public native cudaResourceDesc resType(int resType);
+	
+			/** CUDA array */
+			@Name("res.array.array") public native cudaArray res_array_array(); public native cudaResourceDesc res_array_array(cudaArray res_array_array);
             /** CUDA mipmapped array */
             @Name("res.mipmap.mipmap") public native cudaMipmappedArray res_mipmap_mipmap(); public native cudaResourceDesc res_mipmap_mipmap(cudaMipmappedArray res_mipmap_mipmap);
-            /** Device pointer */
-            @Name("res.linear.devPtr") public native Pointer res_linear_devPtr(); public native cudaResourceDesc res_linear_devPtr(Pointer res_linear_devPtr);
-            /** Channel descriptor */
-            @Name("res.linear.desc") public native @ByRef cudaChannelFormatDesc res_linear_desc(); public native cudaResourceDesc res_linear_desc(cudaChannelFormatDesc res_linear_desc);
-            /** Size in bytes */
-            @Name("res.linear.sizeInBytes") public native @Cast("size_t") long res_linear_sizeInBytes(); public native cudaResourceDesc res_linear_sizeInBytes(long res_linear_sizeInBytes);
-            /** Device pointer */
-            @Name("res.pitch2D.devPtr") public native Pointer res_pitch2D_devPtr(); public native cudaResourceDesc res_pitch2D_devPtr(Pointer res_pitch2D_devPtr);
-            /** Channel descriptor */
-            @Name("res.pitch2D.desc") public native @ByRef cudaChannelFormatDesc res_pitch2D_desc(); public native cudaResourceDesc res_pitch2D_desc(cudaChannelFormatDesc res_pitch2D_desc);
-            /** Width of the array in elements */
-            @Name("res.pitch2D.width") public native @Cast("size_t") long res_pitch2D_width(); public native cudaResourceDesc res_pitch2D_width(long res_pitch2D_width);
-            /** Height of the array in elements */
-            @Name("res.pitch2D.height") public native @Cast("size_t") long res_pitch2D_height(); public native cudaResourceDesc res_pitch2D_height(long res_pitch2D_height);
-            /** Pitch between two rows in bytes */
-            @Name("res.pitch2D.pitchInBytes") public native @Cast("size_t") long res_pitch2D_pitchInBytes(); public native cudaResourceDesc res_pitch2D_pitchInBytes(long res_pitch2D_pitchInBytes);
+			/** Device pointer */
+			@Name("res.linear.devPtr") public native Pointer res_linear_devPtr(); public native cudaResourceDesc res_linear_devPtr(Pointer res_linear_devPtr);
+			/** Channel descriptor */
+			@Name("res.linear.desc") public native @ByRef cudaChannelFormatDesc res_linear_desc(); public native cudaResourceDesc res_linear_desc(cudaChannelFormatDesc res_linear_desc);
+			/** Size in bytes */
+			@Name("res.linear.sizeInBytes") public native @Cast("size_t") long res_linear_sizeInBytes(); public native cudaResourceDesc res_linear_sizeInBytes(long res_linear_sizeInBytes);
+			/** Device pointer */
+			@Name("res.pitch2D.devPtr") public native Pointer res_pitch2D_devPtr(); public native cudaResourceDesc res_pitch2D_devPtr(Pointer res_pitch2D_devPtr);
+			/** Channel descriptor */
+			@Name("res.pitch2D.desc") public native @ByRef cudaChannelFormatDesc res_pitch2D_desc(); public native cudaResourceDesc res_pitch2D_desc(cudaChannelFormatDesc res_pitch2D_desc);
+			/** Width of the array in elements */
+			@Name("res.pitch2D.width") public native @Cast("size_t") long res_pitch2D_width(); public native cudaResourceDesc res_pitch2D_width(long res_pitch2D_width);
+			/** Height of the array in elements */
+			@Name("res.pitch2D.height") public native @Cast("size_t") long res_pitch2D_height(); public native cudaResourceDesc res_pitch2D_height(long res_pitch2D_height);
+			/** Pitch between two rows in bytes */
+			@Name("res.pitch2D.pitchInBytes") public native @Cast("size_t") long res_pitch2D_pitchInBytes(); public native cudaResourceDesc res_pitch2D_pitchInBytes(long res_pitch2D_pitchInBytes);
 }
